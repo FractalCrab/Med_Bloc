@@ -26,7 +26,7 @@ class Blockchain:
     def __init__(self):
         self.unconfirmed_transactions = []
         self.chain = []
-        
+'''        
     def create_genesis_block(self):
         transactions={}
         previous_hash=0
@@ -37,7 +37,7 @@ class Blockchain:
         genesis_block = Block(0, [], time.time(), "0")
         genesis_block.hash = genesis_block.generate_hash()
         self.chain.append(genesis_block)
-'''
+
     @property
     def last_block(self):
         return self.chain[-1]
