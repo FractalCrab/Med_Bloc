@@ -26,12 +26,18 @@ class Blockchain:
     def __init__(self):
         self.unconfirmed_transactions = []
         self.chain = []
-
+        
+    def create_genesis_block(self):
+        transactions={}
+        previous_hash=0
+        self.chain.append(Block(transactions,previous_hash))
+#       return self.chain
+'''
     def create_genesis_block(self):
         genesis_block = Block(0, [], time.time(), "0")
         genesis_block.hash = genesis_block.generate_hash()
         self.chain.append(genesis_block)
-
+'''
     @property
     def last_block(self):
         return self.chain[-1]
@@ -48,17 +54,27 @@ class Blockchain:
         block.hash = proof
         self.chain.append(block)
         return True
-
+    '''
+    def proof_of_work(self,block,difficulty=2):
+        proof=block.generate_hash()
+        while proof[:difficulty]!='0'*difficulty:
+            block.nonce +=1
+            proof=block.generate_hash()
+        block.nonce=0
+        return proof
+    '''
+    #for testing proof of work
     def proof_of_work(self, block):
 
         block.nonce = 0
-
+        
         computed_hash = block.generate_hash()
         while not computed_hash.startswith('0' * Blockchain.difficulty):
             block.nonce += 1
             computed_hash = block.generate_hash()
 
         return computed_hash
+
 
     def add_new_transaction(self, transaction):
         self.unconfirmed_transactions.append(transaction)
