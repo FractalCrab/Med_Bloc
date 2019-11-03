@@ -425,7 +425,6 @@ def new_transaction():
 
 @app.route('/chain', methods=['GET'])
 def get_chain():
-    # make sure we've the longest chain
     consensus()
     chain_data = []
     for block in blockchain.chain:
